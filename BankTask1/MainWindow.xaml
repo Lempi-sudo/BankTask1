@@ -6,27 +6,29 @@
         xmlns:local="clr-namespace:BankTask1"
         mc:Ignorable="d"
         Title="MainWindow" Height="430.8" Width="749.6">
-    <Grid Margin="0,0,3.2,0.8" RenderTransformOrigin="0.5,0.5">
-        <Grid.RenderTransform>
-            <TransformGroup>
-                <ScaleTransform/>
-                <SkewTransform/>
-                <RotateTransform Angle="-0.565"/>
-                <TranslateTransform/>
-            </TransformGroup>
-        </Grid.RenderTransform>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="154,147,0,0" VerticalAlignment="Top" Width="361" Height="41" Click="Button_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="249,71,0,0" TextWrapping="Wrap" Text="Введите имя, id , Приоритет" VerticalAlignment="Top" Width="160" Height="18"/>
-        <TextBox Name="Text" HorizontalAlignment="Left" Height="23" Margin="150,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="364" RenderTransformOrigin="0.5,0.5">
-            <TextBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.212"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBox.RenderTransform>
-        </TextBox>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+       
+        <TextBlock Grid.Column="1" Grid.Row="1" Text=" Введите name, id, PriorityClass" HorizontalAlignment="Center" FontSize="17" VerticalAlignment="Bottom" TextWrapping="Wrap"/>
+        <TextBox Grid.Column="1" Grid.Row="2"  Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged, Mode=Default}" />
+        <Button Grid.Column="1" Grid.Row="3"  FontSize="27"  Content="Save"  Click="Button_Click"/>
 
     </Grid>
 </Window>
+       
+           
+
+
+ 
+        

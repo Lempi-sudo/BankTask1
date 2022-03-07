@@ -13,5 +13,14 @@ namespace BankTask1
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            var viewModel = new MainWindowModel(); 
+            var view = new MainWindow { DataContext = viewModel};
+            view.Show();
+            
+        }
+
+
     }
 }

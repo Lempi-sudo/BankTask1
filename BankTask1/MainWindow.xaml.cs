@@ -27,7 +27,15 @@ namespace BankTask1
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string text = Text.Text;
+            var app = new Microsoft.Office.Interop.Excel.Application();
+
+            app.Visible = true;
+
+            app.Workbooks.Open(@"D:\Code\C#\BankTask2/Список_имен.csv");
+
+
+
+            
         }
     }
 }
