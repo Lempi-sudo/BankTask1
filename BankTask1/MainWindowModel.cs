@@ -11,6 +11,8 @@ using System.IO;
 using CsvHelper.Configuration;
 using System.Globalization;
 using CsvHelper;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Diagnostics;
 
 namespace BankTask1
 {
@@ -72,7 +74,7 @@ namespace BankTask1
         }
 
 
-        private string _text;
+        private string _text = "Задача , процесс 2 13 ";
         public string Text
         {
             get => _text;
@@ -105,6 +107,10 @@ namespace BankTask1
                 {
                     csv.WriteRecord(_data);
                 }
+
+            
+                Process.Start(path);
+
 
             }
         }
