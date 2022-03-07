@@ -25,17 +25,17 @@ namespace BankTask1
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var app = new Microsoft.Office.Interop.Excel.Application();
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var app = new Microsoft.Office.Interop.Excel.Application();
 
-            app.Visible = true;
+        //    app.Visible = true;
 
-            app.Workbooks.Open(@"D:\Code\C#\BankTask2/Список_имен.csv");
+        //    app.Workbooks.Open(@"D:\Code\C#\BankTask2/Список_имен.csv");
 
 
 
             
-        }
+        //}
     }
 }
