@@ -38,7 +38,7 @@ namespace BankTask1
 
             foreach (Match m in matches)
             {
-                name = m.Value + " ";
+                name += m.Value + " ";
             }
 
             Regex regexNum = new Regex(@"\d+");
