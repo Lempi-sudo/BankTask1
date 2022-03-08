@@ -24,7 +24,7 @@ namespace BankTask1
             Save = new RelayCommand(_ => save());
         }
        
-        private string _text = "opera ,postgres, StartTime, HasExited,";
+        private string _text = "opera ,postgres, sqlwriter, slack";
         
         public string Text
         {
