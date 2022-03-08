@@ -14,6 +14,7 @@ using CsvHelper;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Diagnostics;
 
+
 namespace BankTask1
 {
     class MainWindowModel : INotifyPropertyChanged
@@ -25,7 +26,7 @@ namespace BankTask1
             Save = new RelayCommand(_ => save());
         }
        
-        private string _text = "Задача , процесс 2 13 ";
+        private string _text = "opera  , tmp , sfaa";
         
         public string Text
         {
@@ -46,34 +47,40 @@ namespace BankTask1
         }
 
         public ICommand Save { get;}
-        
 
         private void save()
         {
-            
-            var tmp = ParserStringToDataForSave.parse(_text);
-
             List<DataForSave> data = new List<DataForSave>();
 
-            data.Add(tmp);
-
-            string path = @"C:\Users\" + Environment.UserName + @"\Documents\Документ Task1.csv";
+            var AllProcess = Process.GetProcesses(); //Все процессы запущённые на данный момент 
+            var ListProcess = ParserString.parse(Text); // Имена процессов написанные в TextBox
+          
+            foreach (Process process in AllProcess)
+            {
+                foreach(string tmpProcess in ListProcess)
+                    if (tmpProcess == process.ProcessName)
+                    {
+                        data.Add(new DataForSave { Name = process.ProcessName, Id = process.Id, PriorityClass = process.PriorityClass });
+                    }
+            }
+                       
+            string path = @"C:\Users\" + Environment.UserName + @"\Documents\Данные о процессе.csv";
 
             using (var writer = new StreamWriter(path, false, Encoding.GetEncoding("windows-1251")))
             {
                 var csvConfig = new CsvConfiguration(CultureInfo.GetCultureInfo("ru-RU"))
                 {
-                   // HasHeaderRecord = true,
-                    
                     Delimiter = ";"
                 };
+
+
 
                 using (var csv = new CsvWriter(writer, csvConfig))
                 {
                     csv.WriteRecords(data);
                 }
 
-            
+
                 Process.Start(path);
 
 
