@@ -50,7 +50,12 @@ namespace BankTask1
 
         private void save()
         {
-            _data = ParserStringToDataForSave.parse(_text);
+            
+            var tmp = ParserStringToDataForSave.parse(_text);
+
+            List<DataForSave> data = new List<DataForSave>();
+
+            data.Add(tmp);
 
             string path = @"C:\Users\" + Environment.UserName + @"\Documents\Документ Task1.csv";
 
@@ -58,13 +63,14 @@ namespace BankTask1
             {
                 var csvConfig = new CsvConfiguration(CultureInfo.GetCultureInfo("ru-RU"))
                 {
-                    HasHeaderRecord = false,
+                   // HasHeaderRecord = true,
+                    
                     Delimiter = ";"
                 };
 
                 using (var csv = new CsvWriter(writer, csvConfig))
                 {
-                    csv.WriteRecord(_data);
+                    csv.WriteRecords(data);
                 }
 
             
