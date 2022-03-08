@@ -18,15 +18,13 @@ using System.Diagnostics;
 namespace BankTask1
 {
     class MainWindowModel : INotifyPropertyChanged
-    {
-        private DataForSave _data;
-        
+    {  
         public MainWindowModel()
         {
             Save = new RelayCommand(_ => save());
         }
        
-        private string _text = "opera  , tmp , sfaa";
+        private string _text = "opera ,postgres, StartTime, HasExited,";
         
         public string Text
         {
@@ -46,6 +44,7 @@ namespace BankTask1
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+
         public ICommand Save { get;}
 
         private void save()
@@ -57,11 +56,22 @@ namespace BankTask1
           
             foreach (Process process in AllProcess)
             {
-                foreach(string tmpProcess in ListProcess)
-                    if (tmpProcess == process.ProcessName)
+                foreach (string tmpProcess in ListProcess)
+                {
+                    try
                     {
-                        data.Add(new DataForSave { Name = process.ProcessName, Id = process.Id, PriorityClass = process.PriorityClass });
+                        if (tmpProcess == process.ProcessName)
+                        {
+                            data.Add(new DataForSave { Name = process.ProcessName, Id = process.Id, PriorityClass = process.PriorityClass });
+                        }
                     }
+                    catch (Win32Exception e)
+                    {
+                        Trace.WriteLine($"к процессу {tmpProcess} {e.Message}");
+                        data.Add(new DataForSave { Name = process.ProcessName + " Отказано в доступе ", Id = 0, PriorityClass = 0 });
+                    }
+                  
+                }
             }
                        
             string path = @"C:\Users\" + Environment.UserName + @"\Documents\Данные о процессе.csv";
@@ -72,22 +82,23 @@ namespace BankTask1
                 {
                     Delimiter = ";"
                 };
-
-
-
                 using (var csv = new CsvWriter(writer, csvConfig))
                 {
                     csv.WriteRecords(data);
                 }
-
-
                 Process.Start(path);
-
-
             }
         }
     }
 }
+
+
+
+
+
+
+
+
 
 
 
