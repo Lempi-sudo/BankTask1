@@ -15,6 +15,7 @@ namespace BankTask1
     {
         public static List<string> parse(string text)
         {
+            //собираем все слова из строки и добавляем их в список нужных процессов
             List<string> res = new List<string>();
             Regex regex = new Regex(@"[А-Яа-яёЁA-Za-z]+");
             MatchCollection matches = regex.Matches(text);

@@ -3,6 +3,8 @@ using System.Windows.Input;
 
 namespace BankTask1
 {
+
+    // класс RelayCommand реализуе интерфейс ICommand и используется для создание команд и обработки событий
     public class RelayCommand : ICommand
     {
         private Action<object> execute;

@@ -21,6 +21,7 @@ namespace BankTask1
        
         private string _text = "opera ,postgres, sqlwriter, slack";
         
+        //Свойство текст связана с представлением через binding и автоматически обновляется 
         public string Text
         {
             get => _text;
@@ -42,13 +43,17 @@ namespace BankTask1
 
         public ICommand Save { get;}
 
+
+        // Обработчик события нажатия на копку saveProcess
         private void save()
         {
             List<DataForSave> data = new List<DataForSave>();
 
             var AllProcess = Process.GetProcesses(); //Все процессы запущённые на данный момент 
             var ListProcess = ParserString.parse(Text); // Имена процессов написанные в TextBox
-          
+
+
+            //находим в списке всех доступных процессов (AllProcess) интересующие нас процессы (ListProcess)
             foreach (Process process in AllProcess)
             {
                 foreach (string tmpProcess in ListProcess)
@@ -68,7 +73,9 @@ namespace BankTask1
                   
                 }
             }
-                       
+            
+
+            //Cохраняем в csv файл
             string path = @"C:\Users\" + Environment.UserName + @"\Documents\Данные о процессе.csv";
 
             using (var writer = new StreamWriter(path, false, Encoding.GetEncoding("windows-1251")))
@@ -81,8 +88,10 @@ namespace BankTask1
                 {
                     csv.WriteRecords(data);
                 }
-                Process.Start(path);
+
             }
+            //открываем в редакторе получившийся csv файл
+            Process.Start(path);
         }
     }
 }
