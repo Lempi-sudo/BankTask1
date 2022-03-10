@@ -12,7 +12,7 @@ using System.Runtime.CompilerServices;
 
 namespace BankTask1
 {
-    class MainWindowModel : INotifyPropertyChanged
+    class MainWindowModel
     {  
         public MainWindowModel()
         {
@@ -28,18 +28,14 @@ namespace BankTask1
             set
             {
                 _text = value;
-                OnPropertyChanged();
+            
             }
 
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+      
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
+       
 
         public ICommand Save { get;}
 

@@ -17,7 +17,7 @@ namespace BankTask1
         protected override void OnStartup(StartupEventArgs e)
         {
             var viewModel = new MainWindowModel();
-            viewModel.PropertyChanged += mess;
+    
             var view = new MainWindow { DataContext = viewModel};
             view.Show();
             
