@@ -8,7 +8,7 @@ using CsvHelper.Configuration;
 using System.Globalization;
 using CsvHelper;
 using System.Diagnostics;
-
+using System.Runtime.CompilerServices;
 
 namespace BankTask1
 {
@@ -28,14 +28,14 @@ namespace BankTask1
             set
             {
                 _text = value;
-                OnPropertyChanged(nameof(Text));
+                OnPropertyChanged();
             }
 
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName = "")
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -47,6 +47,7 @@ namespace BankTask1
         // Обработчик события нажатия на копку saveProcess
         private void save()
         {
+            
             List<DataForSave> data = new List<DataForSave>();
 
             var AllProcess = Process.GetProcesses(); //Все процессы запущённые на данный момент 
@@ -92,9 +93,12 @@ namespace BankTask1
             }
             //открываем в редакторе получившийся csv файл
             Process.Start(path);
+
+            
         }
     }
 }
+            
 
 
 

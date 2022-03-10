@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
@@ -15,12 +16,18 @@ namespace BankTask1
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            var viewModel = new MainWindowModel(); 
+            var viewModel = new MainWindowModel();
+            viewModel.PropertyChanged += mess;
             var view = new MainWindow { DataContext = viewModel};
             view.Show();
             
         }
 
+        public static void mess(object ob , PropertyChangedEventArgs e )
+        {
+            Console.WriteLine($"e.PropertyName = {e.PropertyName} ,  e.GetType = {e.GetType()} , e.string {e.ToString()} ");
+        }
 
     }
 }
+
